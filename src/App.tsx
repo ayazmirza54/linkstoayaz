@@ -93,7 +93,7 @@ const LetterShower = () => {
 
 function App() {
   const [glitchText, setGlitchText] = useState('');
-  const originalText = '> AYAZMIRZA54.LINKS';
+  const originalText = 'AYAZMIRZA.LINKS';
 
   useEffect(() => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
@@ -260,7 +260,7 @@ function App() {
         </div>
 
         {/* Name and Bio */}
-        <h1 className="text-[24px] mb-2">{glitchText}</h1>
+        <h1 className="text-[20px] mb-2">{glitchText}</h1>
         <p className="text-center mb-8 max-w-sm opacity-80 text-gray-300">
           {"Find all my projects and link here"}
         </p>
