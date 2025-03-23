@@ -17,6 +17,7 @@ import { FaLinux } from "react-icons/fa";
 import { CgSketch } from 'react-icons/cg';
 import { RxReader } from 'react-icons/rx';
 import { MdMovie } from 'react-icons/md';
+import CVDownload from './Components/resumedownload';
 // LetterShower component for falling letters animation
 const LetterShower = () => {
   const [letters, setLetters] = useState<{ id: number, char: string, x: number, y: number, speed: number, opacity: number, size: number, rotate: number }[]>([]);
@@ -289,7 +290,8 @@ function App() {
             );
           })}
         </div>
-
+{/* Download CV button */}
+<CVDownload /><br></br><br></br><br></br>
         {/* Link Buttons */}
         <div className="w-full space-y-4">
           {links.map((link, index) => (
