@@ -263,7 +263,7 @@ function App() {
         {/* Name and Bio */}
         <h1 className="text-[20px] mb-2">{glitchText}</h1>
         <p className="text-center mb-8 max-w-sm opacity-80 text-gray-300">
-          {"Find all my projects and link here"}
+          {"Find all my projects and social links here"}
         </p>
 
         {/* Social Links - Bento Box Style */}
