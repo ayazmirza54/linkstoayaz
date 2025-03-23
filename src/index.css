@@ -1,0 +1,471 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased bg-black;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 2px #4AF626, 0 0 4px #4AF626, 0 0 3px #4AF626;
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 2px #4AF626, 0 0 4px #4AF626;
+  }
+
+  .matrix-bg {
+    background: linear-gradient(180deg, 
+      rgba(0,0,0,0.9) 0%,
+      rgba(74,246,38,0.1) 100%
+    );
+  }
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+  }
+  2% {
+    clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+  }
+  4% {
+    clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+  }
+  6% {
+    clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+  }
+  8% {
+    clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+  }
+  10% {
+    clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+  }
+  12% {
+    clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+  }
+  14% {
+    clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+  }
+  16% {
+    clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+  }
+  18% {
+    clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+  }
+  20% {
+    clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@font-face {
+    font-family: 'Atari Classic Chunky';
+    src: url('./assets/AtariClassicChunky.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --black: #000000;
+  --text-color: rgba(255, 255, 255, 0);
+}
+
+body {
+  background-color: var(--black);
+  margin: 0;
+  padding: 0;
+}
+h1{
+  font-family: 'Atari Classic Chunky', monospace;
+  color: rgba(255, 255, 255, 0.461);
+  background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #ffffff));
+  background: -moz-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #ffffff));
+  background: gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #ffffff));
+  background-size: 50px 100%;
+  background-clip: text;
+  animation-name: shimmer;
+  animation-delay: -3s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: #222;
+}
+.bg-grid {
+  position: fixed;
+  left: 0%;
+  top: auto;
+  right: 0%;
+  bottom: 0%;
+  overflow: hidden;
+  width: 100%;
+  height: 70vh;
+  perspective: 56.25vh;
+  z-index: 0;
+  
+}
+
+.bg-grid-lines {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 0;
+  width: 100%;
+  height: 200%;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.4) 1px,
+      transparent 0
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.4) 1px,
+      transparent 0
+    );
+  background-size: 4vh 3vh;
+  background-repeat: repeat;
+  transform-origin: 100% 0 0;
+  animation: play 30s linear infinite;
+}
+.bg-grid-mask {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  background-color: transparent;
+  background-image: linear-gradient(180deg, var(--black) 25%, transparent),
+          radial-gradient(
+            circle farthest-corner at 50% 0%,
+            transparent 60%,
+            var(--black) 95%
+          );
+  z-index: 0;
+ 
+}
+
+
+@keyframes play {
+  0% {
+    transform: rotateX(45deg) translateY(-50%);
+  }
+  100% {
+    transform: rotateX(45deg) translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+body {
+  background-color: #000000;
+}
+
+.portfolio-container {
+  background-color: #000000;
+  background-image: radial-gradient(circle, #3131313c 1px, transparent 1px);
+  background-size: 20px 20px;
+  width: 100%; /* Full width on mobile */
+  padding: 15px; /* Smaller padding for mobile */
+  margin: 0 auto;
+  
+}
+.container{
+    backdrop-filter: blur(5px); /* optional: adds slight blur to grid behind text */
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  height: 1px;
+  width: 1em;
+  background-color: white;
+}
+
+li:last-child::after {
+  content: none;
+}
+
+li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  bottom: -0.6em;
+  width: 1px;
+  background-color: white;
+}
+.glitch-blue {
+  position: relative;
+  margin: 1rem 0;
+  animation: glitch-animation 1.6s infinite;
+  font-family: "Atari Classic Chunky", system-ui, sans-serif;
+  color: rgb(255, 255, 255);
+  width: 100%;
+}
+
+.glitch-blue:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: -1;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+.glitch-green {
+  position: relative;
+  margin: 1rem 0;
+  animation: glitch-animation 1.6s infinite;
+  font-family: "Atari Classic Chunky", system-ui, sans-serif;
+  color: rgb(255, 255, 255);
+  width: 100%;
+}
+
+.glitch-green:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: -1;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+.glitch-light-blue {
+  position: relative;
+  margin: 1rem 0;
+  animation: glitch-animation 1.6s infinite;
+  font-family: "Atari Classic Chunky", system-ui, sans-serif;
+  color: rgb(255, 255, 255);
+  width: 100%;
+}
+
+.glitch-.glitch-light-blue:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: -1;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+.glitch-yellow {
+  position: relative;
+  margin: 1rem 0;
+  animation: glitch-animation 1.6s infinite;
+  font-family: "Atari Classic Chunky", system-ui, sans-serif;
+  color: rgb(255, 255, 255);
+  width: 100%;
+}
+
+.glitch-yellow:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: -1;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+@keyframes glitch-animation {
+  0% {
+    text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
+      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  5% {
+    text-shadow: 2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
+      -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  10% {
+    text-shadow: 0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5),
+      -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  15% {
+    text-shadow: 0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5),
+      -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  20% {
+    text-shadow: 3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5),
+      -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  25% {
+    text-shadow: 1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5),
+      -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  30% {
+    text-shadow: 0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5),
+      -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  35% {
+    text-shadow: 3.896914047650351px 0 1px rgba(0, 30, 255, 0.5),
+      -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  40% {
+    text-shadow: 3.870905614848819px 0 1px rgba(0, 30, 255, 0.5),
+      -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  45% {
+    text-shadow: 2.231056963361899px 0 1px rgba(0, 30, 255, 0.5),
+      -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  50% {
+    text-shadow: 0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5),
+      -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  55% {
+    text-shadow: 2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5),
+      -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  60% {
+    text-shadow: 2.202193051050636px 0 1px rgba(0, 30, 255, 0.5),
+      -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  65% {
+    text-shadow: 2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5),
+      -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  70% {
+    text-shadow: 0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5),
+      -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  75% {
+    text-shadow: 1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5),
+      -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  80% {
+    text-shadow: 0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5),
+      -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  85% {
+    text-shadow: 0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5),
+      -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  90% {
+    text-shadow: 3.443339761481782px 0 1px rgba(0, 30, 255, 0.5),
+      -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  95% {
+    text-shadow: 2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5),
+      -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  100% {
+    text-shadow: 2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
+      -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+}
+.griddy{
+  filter: blur(2px);
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  .portfolio-container {
+    width: 75%; /* 60% width on larger screens */
+    padding: 30px; /* Larger padding for desktop */
+  }}
+
+.link-text {
+  font-family: 'Atari Classic Chunky', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.6) 50%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-animation 5s linear infinite;
+}
+
+@keyframes shimmer-animation {
+  0% {
+    background-position: -300% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
+}
+
