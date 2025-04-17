@@ -13,7 +13,7 @@ import { FaBuildingFlag } from "react-icons/fa6";
 import skillicon from "./assets/abilities.png"
 import { VscFileMedia } from "react-icons/vsc";
 import { FaLinux } from "react-icons/fa";
-
+import { FcGoogle } from "react-icons/fc";
 import { CgSketch } from 'react-icons/cg';
 import { RxReader } from 'react-icons/rx';
 import { MdMovie } from 'react-icons/md';
@@ -189,6 +189,10 @@ function App() {
       title: 'Rock Paper Scissors Webapp',
       url: 'https://rock-paper-scrissors.netlify.app/'
     },
+    {
+      title: 'Got feature on google website for gemini api competition',
+      url: "https://ai.google.dev/competition/projects/text-code-utilsai'
+    }
   ]);
 
   const [socials] = useState([
@@ -317,6 +321,7 @@ function App() {
                 {index === 13 && <RxReader size={40} className="text-gray-300" />}
                 {index === 14 && <MdMovie size={40} className="text-gray-300" />}
                 {index === 15 && <Gamepad size={40} className="text-gray-300" />}
+                {index === 16 && <FcGoogle size={40} className="text-gray-300" />}
             
 
                 <span className="link-text">{link.title}</span>
