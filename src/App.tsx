@@ -191,7 +191,7 @@ function App() {
     },
     {
       title: 'Got feature on google website for gemini api competition',
-      url: "https://ai.google.dev/competition/projects/text-code-utilsai'
+      url: "https://ai.google.dev/competition/projects/text-code-utilsai"
     }
   ]);
 
