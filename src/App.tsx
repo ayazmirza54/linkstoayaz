@@ -18,6 +18,7 @@ import { CgSketch } from 'react-icons/cg';
 import { RxReader } from 'react-icons/rx';
 import { MdMovie } from 'react-icons/md';
 import CVDownload from './Components/resumedownload';
+import Footer from './Components/Footer';
 // LetterShower component for falling letters animation
 const LetterShower = () => {
   const [letters, setLetters] = useState<{ id: number, char: string, x: number, y: number, speed: number, opacity: number, size: number, rotate: number }[]>([]);
@@ -332,10 +333,7 @@ function App() {
         </div>
 
         {/* Footer */}
-        <div className="mt-auto pt-12 text-center">
-          <p className="text-sm opacity-50 text-gray-400">{"PORTFOLIO LINKS"}</p>
-          <p className="font-bold">AYAZ MIRZA</p>
-        </div>
+        <Footer />
       </div>
     </div>
   );
