@@ -79,7 +79,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-footer {
+.footer {
   font-family: 'Atari Classic Chunky', monospace;
 }
 :root {
