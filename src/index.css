@@ -79,6 +79,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+footer {
+  font-family: 'Atari Classic Chunky', monospace;
+}
 :root {
   --black: #000000;
   --text-color: rgba(255, 255, 255, 0);
