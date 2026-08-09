@@ -1,341 +1,152 @@
-import { useState, useEffect } from 'react';
-import { Terminal, Github, Mail, Link as LinkIcon, ChevronRight, Globe2Icon, BookUser, Linkedin, Search, Gamepad } from 'lucide-react';
-import { FaDev } from "react-icons/fa";
-import { GiMailbox } from "react-icons/gi";
-import { FaLinkedin } from "react-icons/fa";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Briefcase,
+  Code2,
+  Download,
+  FileText,
+  Github,
+  Globe2,
+  GraduationCap,
+  Linkedin,
+  Mail,
+  Network,
+  Search,
+  Sparkles,
+  TerminalSquare,
+} from 'lucide-react';
 import image from './assets/profile.png';
-import { GrDocument, GrGoogle } from 'react-icons/gr';
-import { TiContacts } from "react-icons/ti";
-import { TbSql } from 'react-icons/tb';
-import { LuBrainCircuit } from "react-icons/lu";
-import { SiCoder, SiSketchup, SiStudyverse } from "react-icons/si";
-import { FaBuildingFlag } from "react-icons/fa6";
-import skillicon from "./assets/abilities.png"
-import { VscFileMedia } from "react-icons/vsc";
-import { FaLinux } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { CgSketch } from 'react-icons/cg';
-import { RxReader } from 'react-icons/rx';
-import { MdMovie } from 'react-icons/md';
-import CVDownload from './Components/resumedownload';
-import Footer from './Components/Footer';
-// LetterShower component for falling letters animation
-const LetterShower = () => {
-  const [letters, setLetters] = useState<{ id: number, char: string, x: number, y: number, speed: number, opacity: number, size: number, rotate: number }[]>([]);
 
-  useEffect(() => {
-    const possibleChars = '0123456789';
-    const maxLetters = 50;
-
-    // Initialize letters
-    const initialLetters = Array.from({ length: maxLetters }, (_, i) => ({
-      id: i,
-      char: possibleChars[Math.floor(Math.random() * possibleChars.length)],
-      x: Math.random() * 100, // percentage across screen
-      y: Math.random() * -100, // start above screen
-      speed: 0.1 + Math.random() * 0.2,
-      opacity: 0.1 + Math.random() * 0.1, // Very low opacity (0.05-0.15)
-      size: 0.8 + Math.random() * 1.2, // Size variation (0.8-2.0rem)
-      rotate: Math.random() * 30 - 15 // Rotation between -15 and 15 degrees
-    }));
-
-    setLetters(initialLetters);
-
-    const animationFrame = setInterval(() => {
-      setLetters(prevLetters =>
-        prevLetters.map(letter => {
-          // Update position
-          let newY = letter.y + letter.speed;
-
-          // Reset if off screen
-          if (newY > 100) {
-            newY = Math.random() * -30;
-            return {
-              ...letter,
-              y: newY,
-              x: Math.random() * 100,
-              char: possibleChars[Math.floor(Math.random() * possibleChars.length)],
-              opacity: 0.05 + Math.random() * 0.1,
-              size: 0.8 + Math.random() * 1.2,
-              rotate: Math.random() * 30 - 15
-            };
-          }
-
-          return { ...letter, y: newY };
-        })
-      );
-    }, 50);
-
-    return () => clearInterval(animationFrame);
-  }, []);
-
-  return (
-    <div className="fixed inset-0 z-1 overflow-hidden pointer-events-none">
-      {letters.map(letter => (
-        <div
-          key={letter.id}
-          style={{
-            position: 'absolute',
-            left: `${letter.x}%`,
-            top: `${letter.y}%`,
-            color: 'silver',
-            opacity: letter.opacity,
-            fontSize: `${letter.size}rem`,
-            transform: `rotate(${letter.rotate}deg)`,
-            userSelect: 'none',
-            fontWeight: 'bold'
-          }}
-        >
-          {letter.char}
-        </div>
-      ))}
-    </div>
-  );
+type LinkItem = {
+  title: string;
+  description: string;
+  href: string;
+  icon: typeof Code2;
+  featured?: boolean;
 };
 
-function App() {
-  const [glitchText, setGlitchText] = useState('');
-  const originalText = 'AYAZMIRZA.LINKS';
+const essentials: LinkItem[] = [
+  {
+    title: 'Portfolio',
+    description: 'Experience, selected projects and technical stack',
+    href: 'https://www.ayazmirza54.in/',
+    icon: Briefcase,
+    featured: true,
+  },
+  {
+    title: 'Download resume',
+    description: 'Data Engineer and Senior Consultant profile',
+    href: '/AyazResume.pdf',
+    icon: Download,
+    featured: true,
+  },
+  {
+    title: 'GitHub',
+    description: 'Code, experiments and open-source work',
+    href: 'https://github.com/ayazmirza54',
+    icon: Github,
+  },
+  {
+    title: 'LinkedIn',
+    description: 'Professional profile and work history',
+    href: 'https://www.linkedin.com/in/ayazmirza54/',
+    icon: Linkedin,
+  },
+  {
+    title: 'Email me',
+    description: 'ayazmirza54@gmail.com',
+    href: 'mailto:ayazmirza54@gmail.com',
+    icon: Mail,
+  },
+  {
+    title: 'Dev.to',
+    description: 'Notes on AI, web development and shipping projects',
+    href: 'https://dev.to/ayazmirza54',
+    icon: BookOpen,
+  },
+  {
+    title: 'X / Twitter',
+    description: 'Short notes and project updates',
+    href: 'https://x.com/ayazmirza54',
+    icon: Network,
+  },
+];
 
-  useEffect(() => {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
-    let interval: any;
+const projects: LinkItem[] = [
+  { title: 'QuerySmith', description: 'AI assistant for writing SQL queries', href: 'https://query-smith.streamlit.app/', icon: TerminalSquare },
+  { title: 'Gen-a-mail', description: 'AI assistant for drafting email messages', href: 'http://gen-email-agent-ai.streamlit.app/', icon: Mail },
+  { title: 'Text to Content AI', description: 'Generate content from a simple text prompt', href: 'https://texttocontentai.vercel.app/', icon: Sparkles },
+  { title: 'IntelliSketch', description: 'AI-powered drawing and maths sketch companion', href: 'https://intellisketch.vercel.app/', icon: GraduationCap },
+  { title: 'Chat2PDF', description: 'Conversational PDF assistant built with Gemini', href: 'https://chat2pdf-using-gemini.streamlit.app/', icon: FileText },
+  { title: 'UnixBot', description: 'A practical chatbot for Unix commands', href: 'https://unix-bot.streamlit.app/', icon: TerminalSquare },
+  { title: 'DevOps Script Generator', description: 'Generate Docker, Terraform and Ansible scripts', href: 'https://devopslab.streamlit.app/', icon: Code2 },
+  { title: 'EC2 Manager TUI', description: 'Terminal-based AWS EC2 instance manager', href: 'https://github.com/ayazmirza54/ec2-manager-tui', icon: TerminalSquare },
+  { title: 'WebSearch AI', description: 'An AI-assisted web search experiment', href: 'https://websearchai.streamlit.app/', icon: Search },
+  { title: 'StudySensei', description: 'Turn topics into quizzes with Gemini AI', href: 'https://studysensei.vercel.app/', icon: GraduationCap },
+  { title: 'Movie Finder', description: 'Browse films using The Movie Database API', href: 'https://movie-finder-lake-six.vercel.app/', icon: Search },
+  { title: 'Rock Paper Scissors', description: 'A browser game built for a quick break', href: 'https://rock-paper-scrissors.netlify.app/', icon: Network },
+  { title: 'Text/Code Utils.AI', description: 'Featured Google Gemini API competition project', href: 'https://ai.google.dev/competition/projects/text-code-utilsai', icon: Globe2 },
+  { title: 'AI Gadgets', description: 'A curated marketplace for AI tools', href: 'https://www.aigadgets.show/', icon: Sparkles },
+  { title: 'Google Developer Profile', description: 'Google developer profile and activity', href: 'https://g.dev/ayazmirza54', icon: Globe2 },
+  { title: 'Skills archive', description: 'Earlier portfolio skills page', href: 'https://ayazmirza.vercel.app#skills', icon: Code2 },
+  { title: 'Experience archive', description: 'Earlier portfolio work experience page', href: 'https://ayazmirza.vercel.app#workexp', icon: Briefcase },
+];
 
-    const startGlitchEffect = () => {
-      let counter = 0;
-      interval = setInterval(() => {
-        const randomText = Array(originalText.length)
-          .fill(0)
-          .map((_, i) =>
-            counter > i ? originalText[i] : chars[Math.floor(Math.random() * chars.length)]
-          )
-          .join('');
-
-        setGlitchText(randomText);
-        counter++;
-
-        if (counter > originalText.length) {
-          clearInterval(interval);
-          setGlitchText(originalText);
-        }
-      }, 50);
-    };
-
-    startGlitchEffect();
-    return () => clearInterval(interval);
-  }, []);
-
-  const [links] = useState([
-    {
-      title: 'QuerySmith - AI tool for SQL queries',
-      url: 'https://query-smith.streamlit.app/'
-    },
-    {
-      title: 'AI tools marketplace',
-      url: 'https://www.aigadgets.show'
-    },
-    {
-      title: 'Email Generator AI agent',
-      url: 'http://gen-email-agent-ai.streamlit.app/'
-    },
-    {
-      title: 'Devops scripts gereator',
-      url: 'https://devopslab.streamlit.app/'
-    },
-    {
-      title: 'Blogs written by me',
-      url: 'https://dev.to/ayazmirza54'
-    },
-    {
-      title: 'Checkout my skill',
-      url: 'https://ayazmirza.vercel.app#skills'
-    },
-    {
-      title: 'Checkout my work experience',
-      url: 'https://ayazmirza.vercel.app#workexp'
-    },
-    {
-      title: 'AWS EC2 manager terminal based application',
-      url: 'https://github.com/ayazmirza54/ec2-manager-tui'
-    },
-    {
-      title: 'WebSearch AI tool',
-      url: 'https://websearchai.streamlit.app/'
-    },
-    {
-      title: 'Text to Content AI tool',
-      url: 'https://texttocontentai.vercel.app/'
-    },
-    {
-      title: 'Unixbot AI tool',
-      url: 'https://unix-bot.streamlit.app/'
-    },
-    {
-      title: 'Intellisketch AI tool',
-      url: 'https://intellisketch.vercel.app/'
-    },
-    {
-      title: 'Chat2PDF AI tool',
-      url: 'https://chat2pdf-using-gemini.streamlit.app/'
-    },
-    {
-      title: 'Study Sensie - Topic to Quiz generator',
-      url: 'https://studysensei.vercel.app/'
-    },
-    {
-      title: 'Movie Finder',
-      url: 'https://movie-finder-lake-six.vercel.app/'
-    },
-    {
-      title: 'Rock Paper Scissors Webapp',
-      url: 'https://rock-paper-scrissors.netlify.app/'
-    },
-    {
-      title: 'Got feature on google website for gemini api competition',
-      url: "https://ai.google.dev/competition/projects/text-code-utilsai"
-    }
-  ]);
-
-  const [socials] = useState([
-    {
-      icon: Github,
-      url: 'https://github.com/ayazmirza54',
-      label: 'Github'
-    },
-    {
-      icon: FaLinkedin,
-      url: 'https://www.linkedin.com/in/ayazmirza54/',
-      label: 'Linkedin'
-    },
-    {
-      icon: TiContacts,
-      url: 'https://ayazmirza.vercel.app',
-      label: 'Portfolio'
-    },
-    {
-      icon: GiMailbox,
-      url: 'mailto:ayazmirza54@email.com',
-      label: 'Send a mail'
-    },
-
-    {
-      icon: FaDev,
-      url: 'http://dev.to/ayazmirza54',
-      label: 'Dev.to'
-    },
-    {
-      icon: GrGoogle,
-      url: 'http://g.dev/ayazmirza54',
-      label: 'google.dev'
-    }
-  ]);
-
-  const handleLinkClick = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
+function LinkCard({ item }: { item: LinkItem }) {
+  const Icon = item.icon;
+  const isResume = item.href.startsWith('/');
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-4 py-12 text-white relative z-10">
-      {/* Moving Grid Background - visible on left and right sides */}
-      <div className="griddy fixed inset-0 z-0">
-        {/* Using the bg-grid classes from your CSS */}
-        <div className="bg-grid ">
-          <div className="bg-grid-lines"></div>
-        </div>
+    <a
+      className={`link-card${item.featured ? ' link-card--featured' : ''}`}
+      href={item.href}
+      {...(!isResume && { target: '_blank', rel: 'noreferrer' })}
+      {...(isResume && { download: 'Ayaz_Mirza_Resume.pdf' })}
+    >
+      <span className="link-card__icon" aria-hidden="true"><Icon size={20} strokeWidth={1.8} /></span>
+      <span className="link-card__copy">
+        <strong>{item.title}</strong>
+        <small>{item.description}</small>
+      </span>
+      <ArrowUpRight className="link-card__arrow" size={19} aria-hidden="true" />
+    </a>
+  );
+}
 
-        {/* Center mask to make the middle more opaque */}
-        <div className="absolute inset-0 bg-black" style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)'
-        }}></div>
-      </div>
+function App() {
+  return (
+    <main className="page-shell">
+      <div className="topographic-field" aria-hidden="true" />
+      <section className="content-wrap" aria-labelledby="page-title">
+        <header className="hero">
+          <p className="eyebrow"><span /> AYAZ MIRZA / LINKS</p>
+          <div className="hero__identity">
+            <img src={image} alt="Ayaz Mirza" className="portrait" />
+            <div>
+              <h1 id="page-title">A working index<br />of what I build.</h1>
+              <p className="intro">Data Engineer · Senior Consultant · AI &amp; web builder</p>
+            </div>
+          </div>
+          <p className="hero__note">A single place for my work, writing, experiments and ways to get in touch.</p>
+        </header>
 
-      {/* Letter shower animation */}
-      <LetterShower />
+        <section aria-labelledby="start-here" className="link-section">
+          <div className="section-label"><span>01</span><h2 id="start-here">Start here</h2></div>
+          <div className="link-grid">{essentials.map((item) => <LinkCard item={item} key={item.title} />)}</div>
+        </section>
 
-      {/* Main content container with opaque black background */}
-      <div className="relative z-10 flex flex-col items-center w-full md:w-[70%] w-[90%] max-w-md bg-black bg-opacity-90 px-6 py-8 rounded-lg">
-        {/* Profile Section */}
-        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-400 mb-4 relative">
-          <img
-            src={image}
-            alt="Profile"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-white opacity-20"></div>
-        </div>
+        <section aria-labelledby="projects" className="link-section">
+          <div className="section-label"><span>02</span><h2 id="projects">Projects &amp; experiments</h2><p>Small tools, useful utilities and AI explorations.</p></div>
+          <div className="link-grid">{projects.map((item) => <LinkCard item={item} key={item.title} />)}</div>
+        </section>
 
-        {/* Name and Bio */}
-        <h1 className="text-[20px] mb-2">{glitchText}</h1>
-        <p className="text-center mb-8 max-w-sm opacity-80 text-gray-300">
-          {"Find all my projects and social links here"}
-        </p>
-
-        {/* Social Links - Bento Box Style */}
-        <div className="grid grid-cols-3 gap-3 mb-12 w-full max-w-sm">
-          {socials.map((social, index) => {
-            const Icon = social.icon;
-            return (
-              <a
-                key={index}
-                href={social.url}
-                aria-label={social.label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-gray-500 rounded-lg p-[0.5px] hover:bg-gray-800 transition-all duration-300 group flex flex-col items-center justify-center gap-2 aspect-square"
-              >
-                <Icon
-                  size={24}
-                  className="text-gray-300 group-hover:text-white"
-                />
-                <span className="text-xs text-gray-400 group-hover:text-white text-center truncate w-full">
-                  {social.label}
-                </span>
-              </a>
-            );
-          })}
-        </div>
-{/* Download CV button */}
-<CVDownload /><br></br><br></br><br></br>
-        {/* Link Buttons */}
-        <div className="w-full space-y-4">
-          {links.map((link, index) => (
-            <button
-              key={index}
-              onClick={() => handleLinkClick(link.url)}
-              className="w-full group border border-gray-500 bg-black bg-opacity-50 rounded-lg py-4 px-6 flex items-center justify-between hover:border-gray-300 hover:bg-gray-900 transition-all duration-300"
-            >
-              <span className="flex items-center gap-2">
-                {index === 0 && <TbSql size={80} className="text-gray-300" />}
-                {index === 1 && <LuBrainCircuit size={40} className="text-gray-300" />}
-                {index === 2 && <Mail size={40} className="text-gray-300" />}
-                {index === 3 && <SiCoder size={40} className="text-gray-300" />}
-                {index === 4 && <FaDev size={40} className="text-gray-300" />}
-                {index === 5 && <img src={skillicon} height={40} width={40} />}
-                {index === 6 && <FaBuildingFlag size={60} className="text-gray-300" />}
-                {index === 7 && <Terminal size={60} className="text-gray-300" />}
-                {index === 8 && <Search size={40} className="text-gray-300" />}
-                {index === 9 && <VscFileMedia size={40} className="text-gray-300" />}
-                {index === 10 && <FaLinux size={40} className="text-gray-300" />}
-                {index === 11 && <CgSketch size={40} className="text-gray-300" />}
-                {index === 12 && <GrDocument size={40} className="text-gray-300" />}
-                {index === 13 && <RxReader size={40} className="text-gray-300" />}
-                {index === 14 && <MdMovie size={40} className="text-gray-300" />}
-                {index === 15 && <Gamepad size={40} className="text-gray-300" />}
-                {index === 16 && <FcGoogle size={40} className="text-gray-300" />}
-            
-
-                <span className="link-text">{link.title}</span>
-              </span>
-              <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          ))}
-        </div>
-
-        {/* Footer */}
-        <Footer />
-      </div>
-    </div>
+        <footer>
+          <span>LUCKNOW, INDIA</span>
+          <span>© {new Date().getFullYear()} AYAZ MIRZA</span>
+          <a href="mailto:ayazmirza54@gmail.com">LET'S WORK TOGETHER <ArrowUpRight size={14} /></a>
+        </footer>
+      </section>
+    </main>
   );
 }
 
