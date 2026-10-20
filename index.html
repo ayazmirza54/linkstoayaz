@@ -2,24 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./icon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<title>All my links</title>
+    <title>Ayaz Mirza — Links</title>
+    <meta name="description" content="Ayaz Mirza — Data Engineer and AI & web builder. Portfolio, resume, projects and ways to get in touch." />
+    <meta name="theme-color" content="#efeadf" />
 
-<meta property="og:title" content="All my links">
-<meta property="og:image" content="https://opengraph.b-cdn.net/production/images/848d5894-e9d4-45af-9c05-d66495b53fa8.png?token=l_JDE7fR1z9uNSV7FkN00v9KuO8oRTU8f7iyD8J8r7c&amp;height=900&amp;width=1200&amp;expires=33278725809">
-<meta property="og:url" content="https://linkstoayaz.vercel.app/">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://linkstoayaz.vercel.app/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="All my links">
-<meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/848d5894-e9d4-45af-9c05-d66495b53fa8.png?token=l_JDE7fR1z9uNSV7FkN00v9KuO8oRTU8f7iyD8J8r7c&amp;height=900&amp;width=1200&amp;expires=33278725809">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ayaz Mirza — Links" />
+    <meta property="og:description" content="Portfolio, resume, projects and ways to get in touch." />
+    <meta property="og:url" content="https://linkstoayaz.vercel.app/" />
+    <meta property="og:image" content="https://opengraph.b-cdn.net/production/images/848d5894-e9d4-45af-9c05-d66495b53fa8.png?token=l_JDE7fR1z9uNSV7FkN00v9KuO8oRTU8f7iyD8J8r7c&amp;height=900&amp;width=1200&amp;expires=33278725809" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ayazmirza54" />
+    <meta name="twitter:title" content="Ayaz Mirza — Links" />
+    <meta name="twitter:description" content="Portfolio, resume, projects and ways to get in touch." />
+    <meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/848d5894-e9d4-45af-9c05-d66495b53fa8.png?token=l_JDE7fR1z9uNSV7FkN00v9KuO8oRTU8f7iyD8J8r7c&amp;height=900&amp;width=1200&amp;expires=33278725809" />
+
+    <script>
+      // Apply the saved/system theme before first paint to avoid a flash.
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem('theme'); } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
